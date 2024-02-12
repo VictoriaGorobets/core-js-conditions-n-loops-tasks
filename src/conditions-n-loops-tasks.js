@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -62,8 +62,21 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const x1 = queen.x;
+  const y1 = queen.y;
+  const x2 = king.x;
+  const y2 = king.y;
+  if (x1 === x2 || y1 === y2) {
+    return true;
+  }
+  if (x1 === y1 && x2 === y2) {
+    return true;
+  }
+  if (Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -146,8 +159,59 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    let num = '';
+    switch (numberStr[i]) {
+      case '1':
+        num = 'one';
+        break;
+      case '2':
+        num = 'two';
+        break;
+      case '3':
+        num = 'three';
+        break;
+      case '4':
+        num = 'four';
+        break;
+      case '5':
+        num = 'five';
+        break;
+      case '6':
+        num = 'six';
+        break;
+      case '7':
+        num = 'seven';
+        break;
+      case '8':
+        num = 'eight';
+        break;
+      case '9':
+        num = 'nine';
+        break;
+      case '0':
+        num = 'zero';
+        break;
+      case '.':
+      case ',':
+        num = 'point';
+        break;
+      case '-':
+        num = 'minus';
+        break;
+      default:
+        num = '';
+        break;
+    }
+    if (i === numberStr.length - 1) {
+      result += `${num}`;
+    } else {
+      result += `${num} `;
+    }
+  }
+  return result;
 }
 
 /**
@@ -329,8 +393,15 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const link = matrix;
+  const mas = JSON.parse(JSON.stringify(matrix));
+  for (let i = 0; i < mas.length; i += 1) {
+    for (let t = 0; t < mas.length; t += 1) {
+      link[i][t] = mas[mas.length - 1 - t][i];
+    }
+  }
+  return matrix;
 }
 
 /**
@@ -347,8 +418,20 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const mas = arr;
+  const origin = JSON.parse(JSON.stringify(arr));
+  for (let i = 0; i < origin.length; i += 1) {
+    const x = Math.min(...origin);
+    mas[i] = x;
+    for (let t = 0; t < origin.length; t += 1) {
+      if (origin[t] === x) {
+        origin[t] = Infinity;
+        break;
+      }
+    }
+  }
+  return arr;
 }
 
 /**
